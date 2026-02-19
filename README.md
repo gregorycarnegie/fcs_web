@@ -2,6 +2,15 @@
 
 This project recreates the `index.html` landing page using the `leptos` Rust crate (CSR mode).
 
+## Project Layout
+
+- `src/app.rs` top-level app composition
+- `src/components/` section-level Leptos components (`NavBar`, `HeroSection`, etc.)
+- `src/hooks/mod.rs` browser behavior hooks (scroll reveal observer)
+- `style.css` external stylesheet loaded by Trunk
+- `app.html` Trunk entrypoint
+- `.github/workflows/ci.yml` build + smoke checks
+
 ## Prerequisites
 
 - Rust toolchain installed
@@ -39,6 +48,12 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
   cargo build
   ```
 
+- Smoke tests for key section IDs/content:
+
+  ```bash
+  cargo test
+  ```
+
 - WASM compile via Trunk:
 
   ```bash
@@ -47,5 +62,5 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
 
 ## Notes
 
-- `index.html` is kept as the original static reference.
 - `app.html` is the Trunk entry file for the Leptos version.
+- CI runs `cargo build`, `cargo test`, and `trunk build app.html --release` on push/PR.
