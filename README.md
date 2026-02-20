@@ -108,3 +108,44 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
 
 - `app.html` is the Trunk entry file for the Leptos version.
 - CI runs `cargo fmt --check`, `cargo clippy -- -D warnings`, Rust build/tests, Trunk release build, performance checks, and Playwright tests on push/PR.
+
+## Contributing
+
+### Architecture map
+
+- Entry: `src/main.rs` mounts `App` from `src/app.rs`.
+- Composition: `src/app.rs` wires top-level sections and global resources (fonts, main layout).
+- Sections: `src/components/` contains each page section (`nav`, `hero`, `features`, `tech`, `download`, `donate`, `footer`, etc.).
+- Behavior hooks: `src/hooks/mod.rs` owns browser behavior such as reveal observer logic.
+- Styling: `style.css` is the shared stylesheet consumed by Trunk.
+- Browser tests: `e2e/` includes functional, responsive, and visual Playwright coverage.
+
+### Component conventions
+
+- Keep sections isolated in `src/components/<section>.rs` and re-export from `src/components/mod.rs`.
+- Prefer data-driven rendering via typed structs/static arrays plus `For` for repeated cards, tiers, and presets.
+- Keep external links explicit with `target="_blank"` + `rel="noopener noreferrer"` where applicable.
+- Maintain accessibility defaults: semantic landmarks, keyboard focus visibility, and `aria-label` for icon-heavy controls.
+- Preserve reduced-motion behavior and avoid introducing mandatory animations.
+
+### Test and check commands
+
+- Rust checks:
+  - `npm run check:rust`
+- E2E + visual + responsive:
+  - `npm run e2e`
+  - `npm run e2e:responsive`
+  - `npm run e2e:visual`
+- Refresh visual baselines when intentional UI changes occur:
+  - `npm run e2e:visual:update`
+- Performance budgets:
+  - `npm run perf:ci`
+
+### Release checklist
+
+1. Run `npm run check:rust`.
+2. Run `npm run e2e` and confirm no unexpected failures.
+3. If UI changed, run `npm run e2e:visual:update`, review snapshot diffs, then run `npm run e2e:visual`.
+4. Run `npm run perf:ci` and confirm Lighthouse/bundle gates pass.
+5. Run `trunk build app.html --release` and verify `dist/` output is updated as expected.
+6. Update docs/TODO if scope changed and prepare PR with a concise change summary.
