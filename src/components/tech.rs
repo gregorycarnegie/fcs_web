@@ -1,17 +1,18 @@
 use leptos::prelude::*;
 
+const PRESETS: [&str; 7] = [
+    "yunet-core",
+    "yunet-utils",
+    "yunet-gui",
+    "yunet-cli",
+    "tract-onnx",
+    "wgpu/WGSL",
+    "eframe/egui",
+];
+
 #[component]
 pub fn TechSection() -> impl IntoView {
-    let presets = vec![
-        "yunet-core",
-        "yunet-utils",
-        "yunet-gui",
-        "yunet-cli",
-        "tract-onnx",
-        "wgpu/WGSL",
-        "eframe/egui",
-    ];
-    let (active_preset, set_active_preset) = signal(presets[0].to_string());
+    let (active_preset, set_active_preset) = signal(PRESETS[0].to_string());
 
     view! {
         <section class="tech-section">
@@ -23,7 +24,7 @@ pub fn TechSection() -> impl IntoView {
                     <p style="color: var(--muted); margin-top: 1rem; line-height: 1.75; font-size: 0.95rem;">"GPU context pooling means the CLI handles batch jobs efficiently, and the GUI shares the wgpu context with eframe's renderer for zero-overhead compute."</p>
                     <div class="presets-scroll" style="margin-top: 2rem;">
                         <For
-                            each=move || presets.clone().into_iter()
+                            each=move || PRESETS.into_iter()
                             key=|preset| *preset
                             children=move |preset| {
                                 let selected = move || active_preset.get() == preset;

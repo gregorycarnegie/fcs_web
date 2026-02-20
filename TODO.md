@@ -23,8 +23,8 @@
 16. [x] Validate at common breakpoints (320, 375, 768, 1024, 1440).
 17. [x] Ensure no overflow/clipping and stable spacing/typography scale.
 
-18. [ ] Harden content/config maintainability
-19. [ ] Move repeated card/tier/preset data into static arrays/structs and render with `For`.
+18. [x] Harden content/config maintainability
+19. [x] Move repeated card/tier/preset data into static arrays/structs and render with `For`.
 
 20. [ ] Add error/empty resilience checks
 21. [ ] Ensure app still renders cleanly if dynamic pieces (future data/config) are missing.

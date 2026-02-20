@@ -456,18 +456,18 @@ function __wbg_get_imports() {
             console.warn(arg0);
         },
         __wbindgen_cast_0000000000000001: function(arg0, arg1) {
-            // Cast intrinsic for `Closure(Closure { dtor_idx: 104, function: Function { arguments: [NamedExternref("Event")], shim_idx: 105, ret: Unit, inner_ret: Some(Unit) }, mutable: true }) -> Externref`.
-            const ret = makeMutClosure(arg0, arg1, wasm.wasm_bindgen__closure__destroy__h16e112de063185f3, wasm_bindgen__convert__closures_____invoke__h0576ef30d3c4345b);
+            // Cast intrinsic for `Closure(Closure { dtor_idx: 126, function: Function { arguments: [NamedExternref("Array<any>"), NamedExternref("IntersectionObserver")], shim_idx: 124, ret: Unit, inner_ret: Some(Unit) }, mutable: true }) -> Externref`.
+            const ret = makeMutClosure(arg0, arg1, wasm.wasm_bindgen__closure__destroy__h485657bede24e2a1, wasm_bindgen__convert__closures_____invoke__h0a1a23434883a865);
             return ret;
         },
         __wbindgen_cast_0000000000000002: function(arg0, arg1) {
-            // Cast intrinsic for `Closure(Closure { dtor_idx: 174, function: Function { arguments: [Externref], shim_idx: 175, ret: Unit, inner_ret: Some(Unit) }, mutable: true }) -> Externref`.
-            const ret = makeMutClosure(arg0, arg1, wasm.wasm_bindgen__closure__destroy__h4b0a3bbc232f8904, wasm_bindgen__convert__closures_____invoke__h82d21b8b308e4abe);
+            // Cast intrinsic for `Closure(Closure { dtor_idx: 172, function: Function { arguments: [NamedExternref("Event")], shim_idx: 173, ret: Unit, inner_ret: Some(Unit) }, mutable: true }) -> Externref`.
+            const ret = makeMutClosure(arg0, arg1, wasm.wasm_bindgen__closure__destroy__h16e112de063185f3, wasm_bindgen__convert__closures_____invoke__h0576ef30d3c4345b);
             return ret;
         },
         __wbindgen_cast_0000000000000003: function(arg0, arg1) {
-            // Cast intrinsic for `Closure(Closure { dtor_idx: 58, function: Function { arguments: [NamedExternref("Array<any>"), NamedExternref("IntersectionObserver")], shim_idx: 56, ret: Unit, inner_ret: Some(Unit) }, mutable: true }) -> Externref`.
-            const ret = makeMutClosure(arg0, arg1, wasm.wasm_bindgen__closure__destroy__h485657bede24e2a1, wasm_bindgen__convert__closures_____invoke__h0a1a23434883a865);
+            // Cast intrinsic for `Closure(Closure { dtor_idx: 242, function: Function { arguments: [Externref], shim_idx: 243, ret: Unit, inner_ret: Some(Unit) }, mutable: true }) -> Externref`.
+            const ret = makeMutClosure(arg0, arg1, wasm.wasm_bindgen__closure__destroy__h4b0a3bbc232f8904, wasm_bindgen__convert__closures_____invoke__h82d21b8b308e4abe);
             return ret;
         },
         __wbindgen_cast_0000000000000004: function(arg0) {

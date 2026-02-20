@@ -1,5 +1,50 @@
 use leptos::prelude::*;
 
+#[derive(Clone, Copy)]
+struct DownloadCard {
+    href: &'static str,
+    aria_label: &'static str,
+    icon: &'static str,
+    title: &'static str,
+    description: &'static str,
+    tag: &'static str,
+}
+
+const DOWNLOAD_CARDS: [DownloadCard; 4] = [
+    DownloadCard {
+        href: "https://github.com/gregorycarnegie/iron_cropper/releases/latest",
+        aria_label: "Open latest GitHub release for MSI installer",
+        icon: "📦",
+        title: "MSI Installer",
+        description: "Enterprise-style installer for Windows x86-64. Clean install and uninstall support.",
+        tag: "face-crop-studio-windows-x86_64.msi",
+    },
+    DownloadCard {
+        href: "https://github.com/gregorycarnegie/iron_cropper/releases/latest",
+        aria_label: "Open latest GitHub release for setup executable",
+        icon: "🔧",
+        title: "Setup Executable",
+        description: "Traditional Windows installer with guided setup wizard.",
+        tag: "face-crop-studio-windows-x86_64-setup.exe",
+    },
+    DownloadCard {
+        href: "https://github.com/gregorycarnegie/iron_cropper/releases/latest",
+        aria_label: "Open latest GitHub release for portable zip",
+        icon: "🗜️",
+        title: "Portable ZIP",
+        description: "No install needed. Extract anywhere and run. Ideal for servers and restricted environments.",
+        tag: "face-crop-studio-windows-x86_64.zip",
+    },
+    DownloadCard {
+        href: "https://github.com/gregorycarnegie/iron_cropper",
+        aria_label: "Open Face Crop Studio source repository on GitHub",
+        icon: "🦀",
+        title: "Build from Source",
+        description: "Full Rust workspace. Requires NASM on PATH. Linux and macOS supported via source build.",
+        tag: "cargo build --release --workspace",
+    },
+];
+
 #[component]
 pub fn DownloadSection() -> impl IntoView {
     view! {
@@ -9,30 +54,20 @@ pub fn DownloadSection() -> impl IntoView {
             <p style="color: var(--muted); margin-top: 1rem; max-width: 55ch; font-size: 0.95rem; line-height: 1.7;">"Windows binaries are ready to go. The release package includes the YuNet ONNX model — no manual setup needed."</p>
 
             <div class="download-grid">
-                <a href="https://github.com/gregorycarnegie/iron_cropper/releases/latest" target="_blank" rel="noopener noreferrer" class="download-card reveal" aria-label="Open latest GitHub release for MSI installer">
-                    <div class="dl-icon" aria-hidden="true">"📦"</div>
-                    <h3>"MSI Installer"</h3>
-                    <p>"Enterprise-style installer for Windows x86-64. Clean install and uninstall support."</p>
-                    <span class="dl-tag">"face-crop-studio-windows-x86_64.msi"</span>
-                </a>
-                <a href="https://github.com/gregorycarnegie/iron_cropper/releases/latest" target="_blank" rel="noopener noreferrer" class="download-card reveal" aria-label="Open latest GitHub release for setup executable">
-                    <div class="dl-icon" aria-hidden="true">"🔧"</div>
-                    <h3>"Setup Executable"</h3>
-                    <p>"Traditional Windows installer with guided setup wizard."</p>
-                    <span class="dl-tag">"face-crop-studio-windows-x86_64-setup.exe"</span>
-                </a>
-                <a href="https://github.com/gregorycarnegie/iron_cropper/releases/latest" target="_blank" rel="noopener noreferrer" class="download-card reveal" aria-label="Open latest GitHub release for portable zip">
-                    <div class="dl-icon" aria-hidden="true">"🗜️"</div>
-                    <h3>"Portable ZIP"</h3>
-                    <p>"No install needed. Extract anywhere and run. Ideal for servers and restricted environments."</p>
-                    <span class="dl-tag">"face-crop-studio-windows-x86_64.zip"</span>
-                </a>
-                <a href="https://github.com/gregorycarnegie/iron_cropper" target="_blank" rel="noopener noreferrer" class="download-card reveal" aria-label="Open Face Crop Studio source repository on GitHub">
-                    <div class="dl-icon" aria-hidden="true">"🦀"</div>
-                    <h3>"Build from Source"</h3>
-                    <p>"Full Rust workspace. Requires NASM on PATH. Linux and macOS supported via source build."</p>
-                    <span class="dl-tag">"cargo build --release --workspace"</span>
-                </a>
+                <For
+                    each=move || DOWNLOAD_CARDS.into_iter()
+                    key=|card| card.title
+                    children=move |card| {
+                        view! {
+                            <a href=card.href target="_blank" rel="noopener noreferrer" class="download-card reveal" aria-label=card.aria_label>
+                                <div class="dl-icon" aria-hidden="true">{card.icon}</div>
+                                <h3>{card.title}</h3>
+                                <p>{card.description}</p>
+                                <span class="dl-tag">{card.tag}</span>
+                            </a>
+                        }
+                    }
+                />
             </div>
         </section>
     }

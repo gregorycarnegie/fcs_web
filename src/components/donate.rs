@@ -1,5 +1,69 @@
 use leptos::prelude::*;
 
+#[derive(Clone, Copy)]
+struct DonateTier {
+    name: &'static str,
+    amount: &'static str,
+    description: &'static str,
+    featured: bool,
+}
+
+#[derive(Clone, Copy)]
+struct DonateLink {
+    href: &'static str,
+    aria_label: &'static str,
+    class_name: &'static str,
+    text: &'static str,
+}
+
+const DONATE_TIERS: [DonateTier; 4] = [
+    DonateTier {
+        name: "☕ Buy Me a Coffee",
+        amount: "£3",
+        description: "Small but meaningful. Keeps the compiler warm.",
+        featured: false,
+    },
+    DonateTier {
+        name: "🚀 Boost a Feature",
+        amount: "£10",
+        description: "Funds a new enhancement shader or preset type. Most popular — thank you!",
+        featured: true,
+    },
+    DonateTier {
+        name: "🦀 Rust Patron",
+        amount: "£25",
+        description: "Serious support. Helps fund Linux/macOS build infrastructure and testing.",
+        featured: false,
+    },
+    DonateTier {
+        name: "⚡ GPU Sponsor",
+        amount: "Custom",
+        description: "Got a specific feature in mind? Let's talk. Your name in the README.",
+        featured: false,
+    },
+];
+
+const DONATE_LINKS: [DonateLink; 3] = [
+    DonateLink {
+        href: "https://ko-fi.com",
+        aria_label: "Donate via Ko-fi",
+        class_name: "btn-donate",
+        text: "☕ Ko-fi",
+    },
+    DonateLink {
+        href: "https://github.com/sponsors/gregorycarnegie",
+        aria_label: "Sponsor on GitHub Sponsors",
+        class_name: "btn-donate-outline",
+        text: "♥ GitHub Sponsors",
+    },
+    DonateLink {
+        href: "https://buymeacoffee.com",
+        aria_label: "Donate via Buy Me a Coffee",
+        class_name: "btn-donate-outline",
+        text: "🍵 Buy Me a Coffee",
+    },
+];
+
 #[component]
 pub fn DonateSection() -> impl IntoView {
     view! {
@@ -15,16 +79,34 @@ pub fn DonateSection() -> impl IntoView {
 
                 <div>
                     <div class="donate-tiers">
-                        <div class="tier reveal"><div class="tier-top"><span class="tier-name">"☕ Buy Me a Coffee"</span><span class="tier-amount">"£3"</span></div><p class="tier-desc">"Small but meaningful. Keeps the compiler warm."</p></div>
-                        <div class="tier featured reveal"><div class="tier-top"><span class="tier-name">"🚀 Boost a Feature"</span><span class="tier-amount">"£10"</span></div><p class="tier-desc">"Funds a new enhancement shader or preset type. Most popular — thank you!"</p></div>
-                        <div class="tier reveal"><div class="tier-top"><span class="tier-name">"🦀 Rust Patron"</span><span class="tier-amount">"£25"</span></div><p class="tier-desc">"Serious support. Helps fund Linux/macOS build infrastructure and testing."</p></div>
-                        <div class="tier reveal"><div class="tier-top"><span class="tier-name">"⚡ GPU Sponsor"</span><span class="tier-amount">"Custom"</span></div><p class="tier-desc">"Got a specific feature in mind? Let's talk. Your name in the README."</p></div>
+                        <For
+                            each=move || DONATE_TIERS.into_iter()
+                            key=|tier| tier.name
+                            children=move |tier| {
+                                let class_name = if tier.featured { "tier featured reveal" } else { "tier reveal" };
+                                view! {
+                                    <div class=class_name>
+                                        <div class="tier-top">
+                                            <span class="tier-name">{tier.name}</span>
+                                            <span class="tier-amount">{tier.amount}</span>
+                                        </div>
+                                        <p class="tier-desc">{tier.description}</p>
+                                    </div>
+                                }
+                            }
+                        />
                     </div>
 
                     <div class="donate-buttons">
-                        <a href="https://ko-fi.com" target="_blank" rel="noopener noreferrer" class="btn-donate" aria-label="Donate via Ko-fi">"☕ Ko-fi"</a>
-                        <a href="https://github.com/sponsors/gregorycarnegie" target="_blank" rel="noopener noreferrer" class="btn-donate-outline" aria-label="Sponsor on GitHub Sponsors">"♥ GitHub Sponsors"</a>
-                        <a href="https://buymeacoffee.com" target="_blank" rel="noopener noreferrer" class="btn-donate-outline" aria-label="Donate via Buy Me a Coffee">"🍵 Buy Me a Coffee"</a>
+                        <For
+                            each=move || DONATE_LINKS.into_iter()
+                            key=|link| link.text
+                            children=move |link| {
+                                view! {
+                                    <a href=link.href target="_blank" rel="noopener noreferrer" class=link.class_name aria-label=link.aria_label>{link.text}</a>
+                                }
+                            }
+                        />
                     </div>
                     <p class="donate-note">"// All platforms accept one-time or recurring donations"</p>
                 </div>
