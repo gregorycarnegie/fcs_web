@@ -1,4 +1,5 @@
 use leptos::prelude::*;
+use qrcodegen::{QrCode, QrCodeEcc};
 
 #[derive(Clone, Copy)]
 struct DonateTier {
@@ -125,6 +126,44 @@ fn resolved_donate_links() -> Vec<DonateLink> {
     }
 }
 
+fn wallet_qr_data_uri(address: &str) -> String {
+    use base64::Engine as _;
+
+    let Some(qr) = QrCode::encode_text(address, QrCodeEcc::Medium).ok() else {
+        return "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='100%25' height='100%25' fill='%23f5f5f5'/%3E%3C/svg%3E".to_string();
+    };
+
+    const BORDER: i32 = 2;
+    const MODULE_SIZE: i32 = 6;
+
+    let size = qr.size();
+    let canvas = (size + (BORDER * 2)) * MODULE_SIZE;
+
+    let mut svg = format!(
+        "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 {0} {0}' shape-rendering='crispEdges'><rect width='100%' height='100%' fill='white'/>",
+        canvas
+    );
+
+    for y in 0..size {
+        for x in 0..size {
+            if qr.get_module(x, y) {
+                let x_pos = (x + BORDER) * MODULE_SIZE;
+                let y_pos = (y + BORDER) * MODULE_SIZE;
+                svg.push_str(&format!(
+                    "<rect x='{x_pos}' y='{y_pos}' width='{MODULE_SIZE}' height='{MODULE_SIZE}' fill='black'/>"
+                ));
+            }
+        }
+    }
+
+    svg.push_str("</svg>");
+
+    format!(
+        "data:image/svg+xml;base64,{}",
+        base64::engine::general_purpose::STANDARD.encode(svg)
+    )
+}
+
 #[component]
 pub fn DonateSection() -> impl IntoView {
     let donate_tiers = resolved_donate_tiers();
@@ -138,7 +177,7 @@ pub fn DonateSection() -> impl IntoView {
                     <h2>"Help make it "<span>"better"</span></h2>
                     <p>"Face Crop Studio is free and open-source. Every donation goes directly into development time — better GPU pipelines, new preset types, Linux and macOS builds, and UI improvements."</p>
                     <p>"Even a small contribution keeps the project moving forward. No subscription, no paywalls, no strings attached."</p>
-                    <p style="font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--accent);">"\"Good tools should be accessible to everyone.\""</p>
+                    <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent);">"\"Good tools should be accessible to everyone.\""</p>
                 </div>
 
                 <div>
@@ -181,6 +220,7 @@ pub fn DonateSection() -> impl IntoView {
                             children=move |wallet| {
                                 let (show_qr, set_show_qr) = signal(false);
                                 let explorer_url = format!("{}{}", wallet.explorer_base_url, wallet.address);
+                                let qr_src = wallet_qr_data_uri(wallet.address);
                                 view! {
                                     <div class="crypto-wallet-item">
                                         <div class="crypto-wallet-row">
@@ -209,14 +249,13 @@ pub fn DonateSection() -> impl IntoView {
                                                 </a>
                                             </div>
                                         </div>
-                                        <Show when=move || show_qr.get()>
-                                            <img
-                                                class="crypto-wallet-qr"
-                                                src=format!("https://api.qrserver.com/v1/create-qr-code/?size=180x180&data={}", wallet.address)
-                                                alt=format!("QR code for {} wallet address", wallet.symbol)
-                                                loading="lazy"
-                                            />
-                                        </Show>
+                                        <img
+                                            class="crypto-wallet-qr"
+                                            src=qr_src
+                                            alt=format!("QR code for {} wallet address", wallet.symbol)
+                                            loading="lazy"
+                                            style:display=move || if show_qr.get() { "block" } else { "none" }
+                                        />
                                     </div>
                                 }
                             }

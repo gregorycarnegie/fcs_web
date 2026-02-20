@@ -3,12 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' ws: wss:; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
     <title>Face Crop Studio (Leptos)</title>
-    <link rel="stylesheet" href="/style-19da535c2843251f.css" integrity="sha384-DD3xnAOUIwy+LGzyxq37VPwV/0ELUQfbp5A4W+4Uqm3lAHHhv2mza9CC5xmmAn5C"/>
+    <link rel="stylesheet" href="/style-326232e6d1d465c2.css" integrity="sha384-vZyCzViWHiRloe45ei1Vs/r2ez7uWQQ/Sluj17iQgM9haVq5i+rSnPiL2en9egxM"/>
     
 <script type="module">
-import init, * as bindings from '/fcs_web-3d8fa5417f77cd9c.js';
-const wasm = await init({ module_or_path: '/fcs_web-3d8fa5417f77cd9c_bg.wasm' });
+import init, * as bindings from '/fcs_web-70935c4b1cfe0d20.js';
+const wasm = await init({ module_or_path: '/fcs_web-70935c4b1cfe0d20_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -17,7 +23,7 @@ window.wasmBindings = bindings;
 dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
 
 </script>
-  <link rel="modulepreload" href="/fcs_web-3d8fa5417f77cd9c.js" crossorigin="anonymous" integrity="sha384-/GC4+wvYL5sI8NIfdqjM9HKzkijOtoJIH/BlPHssM/VV+jkkL+IL5xNS0pbuAAXF"><link rel="preload" href="/fcs_web-3d8fa5417f77cd9c_bg.wasm" crossorigin="anonymous" integrity="sha384-Yc4WzoJMDm+TVwydY5Xm8011qht56FLMGRBVVq12LEzV3NF2ts7fsqvytExjp68A" as="fetch" type="application/wasm"></head>
+  <link rel="modulepreload" href="/fcs_web-70935c4b1cfe0d20.js" crossorigin="anonymous" integrity="sha384-ohdnA9vqvv6ot5dS9exDV1eZlTQ+s3rYPzTNSipD5QqFFC1Utff+xOt5R2rxtRjQ"><link rel="preload" href="/fcs_web-70935c4b1cfe0d20_bg.wasm" crossorigin="anonymous" integrity="sha384-LGuoAVdl0gV9SlKgEVqSyXrcXTPK66vFIomhTVC8xIbw9nZ4jLX4Ry2ow57c6TJ2" as="fetch" type="application/wasm"></head>
   <body><script>"use strict";
 
 (function () {

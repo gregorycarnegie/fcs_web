@@ -1,36 +1,40 @@
-# 10/10 TODO
+# Security Audit TODO
 
-1. [x] Add real browser E2E tests
-2. [x] Use Playwright to validate nav anchors, preset pill toggling, reveal behavior, and external links.
+## P0 - High Priority
 
-3. [x] Add visual regression snapshots
-4. [x] Capture baseline screenshots (desktop + mobile) and fail CI on unexpected diffs.
+1. [x] Add Content Security Policy (CSP) and core browser hardening headers
+2. [x] Add `frame-ancestors 'none'` (or equivalent clickjacking protection)
+3. [ ] Add `X-Content-Type-Options: nosniff`
+4. [x] Add strict `Referrer-Policy` (for example `strict-origin-when-cross-origin` or stricter)
+5. [ ] Prefer server-delivered security headers; use `<meta http-equiv>` only as fallback for static hosting
 
-5. [x] Complete accessibility pass
-6. [x] Ensure semantic landmarks/heading order.
-7. [x] Add visible keyboard focus states.
-8. [x] Verify color contrast (WCAG AA).
-9. [x] Add `aria-label` where needed for icon-heavy controls.
+## P1 - Medium Priority
 
-10. [x] Respect reduced-motion preferences
-11. [x] Disable/soften reveal and hero animations under `prefers-reduced-motion`.
+6. [x] Remove runtime dependency on third-party fonts
+7. [x] Eliminate Google Fonts runtime loading from `src/app.rs` (or self-host if reintroduced)
+8. [x] Remove runtime dependency on third-party QR image generation
+9. [x] Replace `api.qrserver.com` usage in `src/components/donate.rs` with local or first-party QR generation
+10. [x] Update CSP allowlist to match only required origins after self-hosting changes
 
-12. [x] Improve performance budget
-13. [x] Optimize font loading (`preload`, subset/self-host if needed).
-14. [x] Audit bundle size and set Lighthouse/perf targets.
+## P1 - CI / Supply Chain Hardening
 
-15. [x] Strengthen responsive QA
-16. [x] Validate at common breakpoints (320, 375, 768, 1024, 1440).
-17. [x] Ensure no overflow/clipping and stable spacing/typography scale.
+11. [ ] Pin GitHub Actions to full commit SHAs (not moving tags)
+12. [x] Replace `npm install` with `npm ci` in CI for reproducible installs
+13. [x] Add explicit minimal `permissions:` block to CI workflow
+14. [ ] Review and limit third-party CI steps/tools to required scope only
 
-18. [x] Harden content/config maintainability
-19. [x] Move repeated card/tier/preset data into static arrays/structs and render with `For`.
+## P2 - Privacy / Operational Hardening
 
-20. [x] Add error/empty resilience checks
-21. [x] Ensure app still renders cleanly if dynamic pieces (future data/config) are missing.
+15. [x] Stop using Lighthouse `temporary-public-storage` unless explicitly required
+16. [x] Switch Lighthouse report upload to private/internal storage or disable upload
 
-22. [x] Add code quality gates
-23. [x] CI: `cargo fmt --check`, `cargo clippy -D warnings`, plus existing build/tests.
+## P1 - Dependency Vulnerability Coverage
 
-24. [x] Improve docs for contributors
-25. [x] Add a “Contributing” section: architecture map, component conventions, test commands, release checklist.
+17. [ ] Add Rust dependency audit to CI (`cargo-audit`)
+18. [ ] Add Node dependency audit to CI (`npm audit` with chosen fail threshold)
+19. [ ] Document remediation policy (how/when to patch vulnerable dependencies)
+
+## Notes
+
+- Current app code does not show direct XSS sinks like `innerHTML` or eval-style usage.
+- Existing `target="_blank"` links correctly include `rel="noopener noreferrer"`.
