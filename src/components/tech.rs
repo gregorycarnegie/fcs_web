@@ -10,9 +10,21 @@ const PRESETS: [&str; 7] = [
     "eframe/egui",
 ];
 
+const FALLBACK_PRESET: &str = "default-preset";
+
+fn resolved_presets() -> Vec<&'static str> {
+    if PRESETS.is_empty() {
+        vec![FALLBACK_PRESET]
+    } else {
+        PRESETS.to_vec()
+    }
+}
+
 #[component]
 pub fn TechSection() -> impl IntoView {
-    let (active_preset, set_active_preset) = signal(PRESETS[0].to_string());
+    let presets = resolved_presets();
+    let initial_preset = presets.first().copied().unwrap_or(FALLBACK_PRESET);
+    let (active_preset, set_active_preset) = signal(initial_preset.to_string());
 
     view! {
         <section class="tech-section">
@@ -24,7 +36,7 @@ pub fn TechSection() -> impl IntoView {
                     <p style="color: var(--muted); margin-top: 1rem; line-height: 1.75; font-size: 0.95rem;">"GPU context pooling means the CLI handles batch jobs efficiently, and the GUI shares the wgpu context with eframe's renderer for zero-overhead compute."</p>
                     <div class="presets-scroll" style="margin-top: 2rem;">
                         <For
-                            each=move || PRESETS.into_iter()
+                            each=move || presets.clone().into_iter()
                             key=|preset| *preset
                             children=move |preset| {
                                 let selected = move || active_preset.get() == preset;

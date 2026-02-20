@@ -10,6 +10,15 @@ struct DownloadCard {
     tag: &'static str,
 }
 
+const FALLBACK_DOWNLOAD_CARDS: [DownloadCard; 1] = [DownloadCard {
+    href: "https://github.com/gregorycarnegie/iron_cropper/releases/latest",
+    aria_label: "Open latest Face Crop Studio releases",
+    icon: "ℹ️",
+    title: "Releases Unavailable",
+    description: "Download metadata is currently unavailable. Open releases for the latest binaries.",
+    tag: "Check latest release artifacts",
+}];
+
 const DOWNLOAD_CARDS: [DownloadCard; 4] = [
     DownloadCard {
         href: "https://github.com/gregorycarnegie/iron_cropper/releases/latest",
@@ -45,8 +54,18 @@ const DOWNLOAD_CARDS: [DownloadCard; 4] = [
     },
 ];
 
+fn resolved_download_cards() -> Vec<DownloadCard> {
+    if DOWNLOAD_CARDS.is_empty() {
+        FALLBACK_DOWNLOAD_CARDS.to_vec()
+    } else {
+        DOWNLOAD_CARDS.to_vec()
+    }
+}
+
 #[component]
 pub fn DownloadSection() -> impl IntoView {
+    let download_cards = resolved_download_cards();
+
     view! {
         <section class="download-section" id="download">
             <div class="section-label">"// get started"</div>
@@ -55,7 +74,7 @@ pub fn DownloadSection() -> impl IntoView {
 
             <div class="download-grid">
                 <For
-                    each=move || DOWNLOAD_CARDS.into_iter()
+                    each=move || download_cards.clone().into_iter()
                     key=|card| card.title
                     children=move |card| {
                         view! {

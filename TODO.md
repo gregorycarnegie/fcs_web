@@ -26,8 +26,8 @@
 18. [x] Harden content/config maintainability
 19. [x] Move repeated card/tier/preset data into static arrays/structs and render with `For`.
 
-20. [ ] Add error/empty resilience checks
-21. [ ] Ensure app still renders cleanly if dynamic pieces (future data/config) are missing.
+20. [x] Add error/empty resilience checks
+21. [x] Ensure app still renders cleanly if dynamic pieces (future data/config) are missing.
 
 22. [ ] Add code quality gates
 23. [ ] CI: `cargo fmt --check`, `cargo clippy -D warnings`, plus existing build/tests.

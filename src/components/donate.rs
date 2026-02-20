@@ -16,6 +16,20 @@ struct DonateLink {
     text: &'static str,
 }
 
+const FALLBACK_DONATE_TIERS: [DonateTier; 1] = [DonateTier {
+    name: "💡 Support Access",
+    amount: "Any",
+    description: "Donation tiers are currently unavailable. Use any support link below.",
+    featured: false,
+}];
+
+const FALLBACK_DONATE_LINKS: [DonateLink; 1] = [DonateLink {
+    href: "https://github.com/sponsors/gregorycarnegie",
+    aria_label: "Support via GitHub Sponsors",
+    class_name: "btn-donate-outline",
+    text: "♥ Support Project",
+}];
+
 const DONATE_TIERS: [DonateTier; 4] = [
     DonateTier {
         name: "☕ Buy Me a Coffee",
@@ -64,8 +78,27 @@ const DONATE_LINKS: [DonateLink; 3] = [
     },
 ];
 
+fn resolved_donate_tiers() -> Vec<DonateTier> {
+    if DONATE_TIERS.is_empty() {
+        FALLBACK_DONATE_TIERS.to_vec()
+    } else {
+        DONATE_TIERS.to_vec()
+    }
+}
+
+fn resolved_donate_links() -> Vec<DonateLink> {
+    if DONATE_LINKS.is_empty() {
+        FALLBACK_DONATE_LINKS.to_vec()
+    } else {
+        DONATE_LINKS.to_vec()
+    }
+}
+
 #[component]
 pub fn DonateSection() -> impl IntoView {
+    let donate_tiers = resolved_donate_tiers();
+    let donate_links = resolved_donate_links();
+
     view! {
         <section class="donate-section" id="donate">
             <div class="donate-inner">
@@ -80,7 +113,7 @@ pub fn DonateSection() -> impl IntoView {
                 <div>
                     <div class="donate-tiers">
                         <For
-                            each=move || DONATE_TIERS.into_iter()
+                            each=move || donate_tiers.clone().into_iter()
                             key=|tier| tier.name
                             children=move |tier| {
                                 let class_name = if tier.featured { "tier featured reveal" } else { "tier reveal" };
@@ -99,7 +132,7 @@ pub fn DonateSection() -> impl IntoView {
 
                     <div class="donate-buttons">
                         <For
-                            each=move || DONATE_LINKS.into_iter()
+                            each=move || donate_links.clone().into_iter()
                             key=|link| link.text
                             children=move |link| {
                                 view! {

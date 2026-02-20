@@ -7,6 +7,12 @@ struct FeatureItem {
     description: &'static str,
 }
 
+const FALLBACK_FEATURE_ITEMS: [FeatureItem; 1] = [FeatureItem {
+    icon: "ℹ️",
+    title: "Configuration Pending",
+    description: "Feature data is currently unavailable. Please check back shortly.",
+}];
+
 const FEATURE_ITEMS: [FeatureItem; 9] = [
     FeatureItem {
         icon: "🎯",
@@ -55,15 +61,25 @@ const FEATURE_ITEMS: [FeatureItem; 9] = [
     },
 ];
 
+fn resolved_feature_items() -> Vec<FeatureItem> {
+    if FEATURE_ITEMS.is_empty() {
+        FALLBACK_FEATURE_ITEMS.to_vec()
+    } else {
+        FEATURE_ITEMS.to_vec()
+    }
+}
+
 #[component]
 pub fn FeaturesSection() -> impl IntoView {
+    let feature_items = resolved_feature_items();
+
     view! {
         <section id="features">
             <div class="section-label">"// capabilities"</div>
             <h2>"Everything you need for "<span>"perfect crops"</span></h2>
             <div class="features-grid">
                 <For
-                    each=move || FEATURE_ITEMS.into_iter()
+                    each=move || feature_items.clone().into_iter()
                     key=|item| item.title
                     children=move |item| {
                         view! {
