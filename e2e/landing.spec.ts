@@ -21,16 +21,16 @@ test.describe("landing page e2e", () => {
     }
   });
 
-  test("preset pill toggling updates the active state", async ({ page }) => {
+  test("preset pills do not persist an active state", async ({ page }) => {
     const corePill = page.locator(".preset-pill", { hasText: "yunet-core" });
     const cliPill = page.locator(".preset-pill", { hasText: "yunet-cli" });
 
-    await expect(corePill).toHaveClass(/active/);
+    await expect(corePill).not.toHaveClass(/active/);
     await expect(cliPill).not.toHaveClass(/active/);
 
     await cliPill.click();
 
-    await expect(cliPill).toHaveClass(/active/);
+    await expect(cliPill).not.toHaveClass(/active/);
     await expect(corePill).not.toHaveClass(/active/);
   });
 
