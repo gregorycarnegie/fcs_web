@@ -60,6 +60,23 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
   trunk build app.html
   ```
 
+- Browser E2E checks (Playwright):
+
+  ```bash
+  npm install
+  npx playwright install --with-deps chromium
+  npm run e2e
+  ```
+
+- Visual regression snapshots (desktop + mobile):
+
+  ```bash
+  npm run e2e:visual:update
+  npm run e2e:visual
+  ```
+
+  First command captures baseline PNGs in `e2e/visual.spec.ts-snapshots/`; second command fails on unexpected diffs.
+
 ## Notes
 
 - `app.html` is the Trunk entry file for the Leptos version.

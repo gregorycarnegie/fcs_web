@@ -1,10 +1,10 @@
 # 10/10 TODO
 
-1. [ ] Add real browser E2E tests
-2. [ ] Use Playwright to validate nav anchors, preset pill toggling, reveal behavior, and external links.
+1. [x] Add real browser E2E tests
+2. [x] Use Playwright to validate nav anchors, preset pill toggling, reveal behavior, and external links.
 
-3. [ ] Add visual regression snapshots
-4. [ ] Capture baseline screenshots (desktop + mobile) and fail CI on unexpected diffs.
+3. [x] Add visual regression snapshots
+4. [x] Capture baseline screenshots (desktop + mobile) and fail CI on unexpected diffs.
 
 5. [ ] Complete accessibility pass
 6. [ ] Ensure semantic landmarks/heading order.

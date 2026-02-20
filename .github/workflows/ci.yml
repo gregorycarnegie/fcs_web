@@ -14,11 +14,22 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Add wasm target
         run: rustup target add wasm32-unknown-unknown
 
       - name: Install Trunk
         run: cargo install trunk --locked
+
+      - name: Install npm dependencies
+        run: npm install
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
 
       - name: Native build
         run: cargo build --locked
@@ -28,3 +39,6 @@ jobs:
 
       - name: WASM bundle build
         run: trunk build app.html --release
+
+      - name: Playwright E2E tests
+        run: npm run e2e
