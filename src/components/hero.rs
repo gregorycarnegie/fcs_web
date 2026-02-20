@@ -21,7 +21,7 @@ pub fn HeroSection() -> impl IntoView {
             </div>
             <div class="hero-actions">
                 <a href="#download" class="btn btn-primary">"⬇ Download for Windows"</a>
-                <a href="https://github.com/gregorycarnegie/iron_cropper" target="_blank" class="btn btn-outline">"View on GitHub →"</a>
+                <a href="https://github.com/gregorycarnegie/iron_cropper" target="_blank" rel="noopener noreferrer" class="btn btn-outline">"View on GitHub →"</a>
             </div>
         </section>
     }

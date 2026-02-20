@@ -22,9 +22,9 @@ pub fn DonateSection() -> impl IntoView {
                     </div>
 
                     <div class="donate-buttons">
-                        <a href="https://ko-fi.com" target="_blank" class="btn-donate">"☕ Ko-fi"</a>
-                        <a href="https://github.com/sponsors/gregorycarnegie" target="_blank" class="btn-donate-outline">"♥ GitHub Sponsors"</a>
-                        <a href="https://buymeacoffee.com" target="_blank" class="btn-donate-outline">"🍵 Buy Me a Coffee"</a>
+                        <a href="https://ko-fi.com" target="_blank" rel="noopener noreferrer" class="btn-donate" aria-label="Donate via Ko-fi">"☕ Ko-fi"</a>
+                        <a href="https://github.com/sponsors/gregorycarnegie" target="_blank" rel="noopener noreferrer" class="btn-donate-outline" aria-label="Sponsor on GitHub Sponsors">"♥ GitHub Sponsors"</a>
+                        <a href="https://buymeacoffee.com" target="_blank" rel="noopener noreferrer" class="btn-donate-outline" aria-label="Donate via Buy Me a Coffee">"🍵 Buy Me a Coffee"</a>
                     </div>
                     <p class="donate-note">"// All platforms accept one-time or recurring donations"</p>
                 </div>

@@ -28,12 +28,13 @@ pub fn TechSection() -> impl IntoView {
                             children=move |preset| {
                                 let selected = move || active_preset.get() == preset;
                                 view! {
-                                    <span
+                                    <button
+                                        type="button"
                                         class=move || if selected() { "preset-pill active" } else { "preset-pill" }
                                         on:click=move |_| set_active_preset.set(preset.to_string())
                                     >
                                         {preset}
-                                    </span>
+                                    </button>
                                 }
                             }
                         />

@@ -6,11 +6,11 @@
 3. [x] Add visual regression snapshots
 4. [x] Capture baseline screenshots (desktop + mobile) and fail CI on unexpected diffs.
 
-5. [ ] Complete accessibility pass
-6. [ ] Ensure semantic landmarks/heading order.
-7. [ ] Add visible keyboard focus states.
-8. [ ] Verify color contrast (WCAG AA).
-9. [ ] Add `aria-label` where needed for icon-heavy controls.
+5. [x] Complete accessibility pass
+6. [x] Ensure semantic landmarks/heading order.
+7. [x] Add visible keyboard focus states.
+8. [x] Verify color contrast (WCAG AA).
+9. [x] Add `aria-label` where needed for icon-heavy controls.
 
 10. [ ] Respect reduced-motion preferences
 11. [ ] Disable/soften reveal and hero animations under `prefers-reduced-motion`.
