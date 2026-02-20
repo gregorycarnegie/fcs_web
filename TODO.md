@@ -4,9 +4,9 @@
 
 1. [x] Add Content Security Policy (CSP) and core browser hardening headers
 2. [x] Add `frame-ancestors 'none'` (or equivalent clickjacking protection)
-3. [ ] Add `X-Content-Type-Options: nosniff`
+3. [x] Add `X-Content-Type-Options: nosniff`
 4. [x] Add strict `Referrer-Policy` (for example `strict-origin-when-cross-origin` or stricter)
-5. [ ] Prefer server-delivered security headers; use `<meta http-equiv>` only as fallback for static hosting
+5. [x] Prefer server-delivered security headers; use `<meta http-equiv>` only as fallback for static hosting
 
 ## P1 - Medium Priority
 
@@ -18,10 +18,10 @@
 
 ## P1 - CI / Supply Chain Hardening
 
-11. [ ] Pin GitHub Actions to full commit SHAs (not moving tags)
+11. [x] Pin GitHub Actions to full commit SHAs (not moving tags)
 12. [x] Replace `npm install` with `npm ci` in CI for reproducible installs
 13. [x] Add explicit minimal `permissions:` block to CI workflow
-14. [ ] Review and limit third-party CI steps/tools to required scope only
+14. [x] Review and limit third-party CI steps/tools to required scope only
 
 ## P2 - Privacy / Operational Hardening
 
@@ -30,9 +30,9 @@
 
 ## P1 - Dependency Vulnerability Coverage
 
-17. [ ] Add Rust dependency audit to CI (`cargo-audit`)
-18. [ ] Add Node dependency audit to CI (`npm audit` with chosen fail threshold)
-19. [ ] Document remediation policy (how/when to patch vulnerable dependencies)
+17. [x] Add Rust dependency audit to CI (`cargo-audit`)
+18. [x] Add Node dependency audit to CI (`npm audit` with chosen fail threshold)
+19. [x] Document remediation policy (how/when to patch vulnerable dependencies)
 
 ## Notes
 

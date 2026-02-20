@@ -107,7 +107,20 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
 ## Notes
 
 - `app.html` is the Trunk entry file for the Leptos version.
-- CI runs `cargo fmt --check`, `cargo clippy -- -D warnings`, Rust build/tests, Trunk release build, performance checks, and Playwright tests on push/PR.
+- CI runs `cargo fmt --check`, `cargo clippy -- -D warnings`, dependency audits (`npm audit`, `cargo audit`), Rust build/tests, Trunk release build, performance checks, and Playwright tests on push/PR.
+
+## Security Headers
+
+- `app.html` includes meta-based security controls to keep local/dev behavior safe by default.
+- Production deployments should enforce headers at the web server/CDN layer.
+- A deploy header template is provided in `_headers` (copied into `dist/` by Trunk).
+
+### Dependency Remediation Policy
+
+1. CI fails on `npm audit` high/critical findings and any `cargo audit` advisory.
+2. Patch direct dependencies first (`npm update`, `cargo update -p <crate>`), then rerun full checks.
+3. If a fix is unavailable, document the risk and mitigation in PR notes before merging.
+4. Remove temporary exceptions once upstream patches are released.
 
 ## Contributing
 
