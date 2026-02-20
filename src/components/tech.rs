@@ -24,8 +24,6 @@ fn resolved_presets() -> Vec<&'static str> {
 #[component]
 pub fn TechSection() -> impl IntoView {
     let presets = resolved_presets();
-    let initial_preset = presets.first().copied().unwrap_or(FALLBACK_PRESET);
-    let (active_preset, set_active_preset) = signal(initial_preset.to_string());
 
     view! {
         <section class="tech-section">
@@ -40,13 +38,8 @@ pub fn TechSection() -> impl IntoView {
                             each=move || presets.clone().into_iter()
                             key=|preset| *preset
                             children=move |preset| {
-                                let selected = move || active_preset.get() == preset;
                                 view! {
-                                    <button
-                                        type="button"
-                                        class=move || if selected() { "preset-pill active" } else { "preset-pill" }
-                                        on:click=move |_| set_active_preset.set(preset.to_string())
-                                    >
+                                    <button type="button" class="preset-pill">
                                         {preset}
                                     </button>
                                 }

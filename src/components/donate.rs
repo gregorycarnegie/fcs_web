@@ -4,17 +4,9 @@ use qrcodegen::{QrCode, QrCodeEcc};
 #[derive(Clone, Copy)]
 struct DonateTier {
     name: &'static str,
-    amount: &'static str,
     description: &'static str,
-    featured: bool,
-}
-
-#[derive(Clone, Copy)]
-struct DonateLink {
     href: &'static str,
     aria_label: &'static str,
-    class_name: &'static str,
-    text: &'static str,
 }
 
 #[derive(Clone, Copy)]
@@ -27,63 +19,29 @@ struct CryptoWallet {
 
 const FALLBACK_DONATE_TIERS: [DonateTier; 1] = [DonateTier {
     name: "💡 Support Access",
-    amount: "Any",
     description: "Donation tiers are currently unavailable. Use any support link below.",
-    featured: false,
-}];
-
-const FALLBACK_DONATE_LINKS: [DonateLink; 1] = [DonateLink {
     href: "https://github.com/sponsors/gregorycarnegie",
     aria_label: "Support via GitHub Sponsors",
-    class_name: "btn-donate-outline",
-    text: "♥ Support Project",
 }];
 
-const DONATE_TIERS: [DonateTier; 4] = [
+const DONATE_TIERS: [DonateTier; 3] = [
     DonateTier {
-        name: "☕ Buy Me a Coffee",
-        amount: "£3",
-        description: "Small but meaningful. Keeps the compiler warm.",
-        featured: false,
-    },
-    DonateTier {
-        name: "🚀 Boost a Feature",
-        amount: "£10",
-        description: "Funds a new enhancement shader or preset type. Most popular — thank you!",
-        featured: true,
-    },
-    DonateTier {
-        name: "🦀 Rust Patron",
-        amount: "£25",
-        description: "Serious support. Helps fund Linux/macOS build infrastructure and testing.",
-        featured: false,
-    },
-    DonateTier {
-        name: "⚡ GPU Sponsor",
-        amount: "Custom",
-        description: "Got a specific feature in mind? Let's talk. Your name in the README.",
-        featured: false,
-    },
-];
-
-const DONATE_LINKS: [DonateLink; 3] = [
-    DonateLink {
+        name: "☕ Ko-fi",
+        description: "Fast one-time support. Keeps the compiler warm.",
         href: "https://ko-fi.com/gregory_carnegie",
         aria_label: "Donate via Ko-fi",
-        class_name: "btn-donate",
-        text: "☕ Ko-fi",
     },
-    DonateLink {
+    DonateTier {
+        name: "♥ GitHub Sponsors",
+        description: "Funds roadmap work and ongoing maintenance. Most popular.",
         href: "https://github.com/sponsors/gregorycarnegie",
         aria_label: "Sponsor on GitHub Sponsors",
-        class_name: "btn-donate-outline",
-        text: "♥ GitHub Sponsors",
     },
-    DonateLink {
+    DonateTier {
+        name: "🍵 Buy Me a Coffee",
+        description: "Simple support option for one-time or recurring donations.",
         href: "https://buymeacoffee.com/gregory_carnegie",
         aria_label: "Donate via Buy Me a Coffee",
-        class_name: "btn-donate-outline",
-        text: "🍵 Buy Me a Coffee",
     },
 ];
 
@@ -114,15 +72,6 @@ fn resolved_donate_tiers() -> Vec<DonateTier> {
         FALLBACK_DONATE_TIERS.to_vec()
     } else {
         DONATE_TIERS.to_vec()
-    }
-}
-
-#[allow(clippy::const_is_empty)]
-fn resolved_donate_links() -> Vec<DonateLink> {
-    if DONATE_LINKS.is_empty() {
-        FALLBACK_DONATE_LINKS.to_vec()
-    } else {
-        DONATE_LINKS.to_vec()
     }
 }
 
@@ -167,7 +116,6 @@ fn wallet_qr_data_uri(address: &str) -> String {
 #[component]
 pub fn DonateSection() -> impl IntoView {
     let donate_tiers = resolved_donate_tiers();
-    let donate_links = resolved_donate_links();
 
     view! {
         <section class="donate-section" id="donate">
@@ -186,27 +134,20 @@ pub fn DonateSection() -> impl IntoView {
                             each=move || donate_tiers.clone().into_iter()
                             key=|tier| tier.name
                             children=move |tier| {
-                                let class_name = if tier.featured { "tier featured reveal" } else { "tier reveal" };
                                 view! {
-                                    <div class=class_name>
+                                    <a
+                                        href=tier.href
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="tier reveal"
+                                        aria-label=tier.aria_label
+                                    >
                                         <div class="tier-top">
                                             <span class="tier-name">{tier.name}</span>
-                                            <span class="tier-amount">{tier.amount}</span>
                                         </div>
                                         <p class="tier-desc">{tier.description}</p>
-                                    </div>
-                                }
-                            }
-                        />
-                    </div>
-
-                    <div class="donate-buttons">
-                        <For
-                            each=move || donate_links.clone().into_iter()
-                            key=|link| link.text
-                            children=move |link| {
-                                view! {
-                                    <a href=link.href target="_blank" rel="noopener noreferrer" class=link.class_name aria-label=link.aria_label>{link.text}</a>
+                                        <span class="tier-cta">"Open donation page"</span>
+                                    </a>
                                 }
                             }
                         />

@@ -13,7 +13,7 @@ pub fn HeroSection() -> impl IntoView {
                 "Precision face detection and cropping with GPU-accelerated batch processing. LinkedIn headshots, passports, IDs — deterministic, high-quality, blazing fast."
             </p>
             <div class="hero-badges">
-                <span class="badge rust">"🦀 Rust"</span>
+                <span class="badge">"🦀 Rust"</span>
                 <span class="badge">"WGSL Compute Shaders"</span>
                 <span class="badge">"YuNet Face Detection"</span>
                 <span class="badge">"GPU + CPU"</span>
