@@ -626,6 +626,26 @@
     transform: none;
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+
+    .hero-eyebrow,
+    h1,
+    .hero-sub,
+    .hero-badges,
+    .hero-actions {
+      opacity: 1;
+      animation: none !important;
+      transform: none !important;
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
   /* ─── RESPONSIVE ─── */
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }

@@ -12,8 +12,8 @@
 8. [x] Verify color contrast (WCAG AA).
 9. [x] Add `aria-label` where needed for icon-heavy controls.
 
-10. [ ] Respect reduced-motion preferences
-11. [ ] Disable/soften reveal and hero animations under `prefers-reduced-motion`.
+10. [x] Respect reduced-motion preferences
+11. [x] Disable/soften reveal and hero animations under `prefers-reduced-motion`.
 
 12. [ ] Improve performance budget
 13. [ ] Optimize font loading (`preload`, subset/self-host if needed).

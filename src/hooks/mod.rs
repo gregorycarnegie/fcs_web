@@ -16,6 +16,25 @@ fn init_reveal_observer() {
         return;
     };
 
+    if window
+        .match_media("(prefers-reduced-motion: reduce)")
+        .ok()
+        .flatten()
+        .is_some_and(|media| media.matches())
+    {
+        if let Ok(elements) =
+            document.query_selector_all(".feature-card, .download-card, .tier, .stat, .tech-inner > div")
+        {
+            for i in 0..elements.length() {
+                if let Some(el) = elements.get(i) {
+                    let el: Element = el.unchecked_into();
+                    let _ = el.class_list().add_1("visible");
+                }
+            }
+        }
+        return;
+    }
+
     let callback = Closure::wrap(Box::new(
         move |entries: js_sys::Array, _observer: IntersectionObserver| {
             for entry in entries.iter() {
