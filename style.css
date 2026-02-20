@@ -589,6 +589,82 @@
     font-family: 'DM Mono', monospace;
   }
 
+  .crypto-wallets {
+    margin-top: 1.25rem;
+    border: 1px solid var(--border);
+    background: var(--card);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  .crypto-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .crypto-sub {
+    margin-top: 0.25rem;
+    margin-bottom: 0.85rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+
+  .crypto-wallet-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.6rem;
+    align-items: center;
+    padding: 0.55rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .crypto-wallet-row:first-of-type {
+    border-top: 0;
+  }
+
+  .crypto-wallet-meta {
+    display: flex;
+    gap: 0.35rem;
+    align-items: baseline;
+    min-width: 0;
+  }
+
+  .crypto-wallet-symbol {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.76rem;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .crypto-wallet-network {
+    color: var(--muted);
+    font-size: 0.72rem;
+  }
+
+  .crypto-wallet-address {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text);
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    min-width: 0;
+  }
+
+  .crypto-wallet-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .crypto-wallet-link:hover {
+    border-color: var(--accent);
+    background: rgba(232,93,38,0.08);
+  }
+
   /* ─── FOOTER ─── */
   footer {
     border-top: 1px solid var(--border);
@@ -697,5 +773,7 @@
     .features-grid, .download-grid { grid-template-columns: 1fr; }
     .feature-card, .download-card, .tier { padding: 1.25rem; }
     .btn, .btn-donate, .btn-donate-outline { width: 100%; justify-content: center; }
+    .crypto-wallet-row { grid-template-columns: 1fr; gap: 0.35rem; }
+    .crypto-wallet-link { justify-self: start; }
     .code-block { font-size: 0.72rem; }
   }

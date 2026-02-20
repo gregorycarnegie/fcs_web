@@ -16,6 +16,14 @@ struct DonateLink {
     text: &'static str,
 }
 
+#[derive(Clone, Copy)]
+struct CryptoWallet {
+    symbol: &'static str,
+    network: &'static str,
+    address: &'static str,
+    explorer_url: &'static str,
+}
+
 const FALLBACK_DONATE_TIERS: [DonateTier; 1] = [DonateTier {
     name: "💡 Support Access",
     amount: "Any",
@@ -75,6 +83,27 @@ const DONATE_LINKS: [DonateLink; 3] = [
         aria_label: "Donate via Buy Me a Coffee",
         class_name: "btn-donate-outline",
         text: "🍵 Buy Me a Coffee",
+    },
+];
+
+const CRYPTO_WALLETS: [CryptoWallet; 3] = [
+    CryptoWallet {
+        symbol: "BTC",
+        network: "Bitcoin",
+        address: "bc1qreplacewithyourbtcaddresshere00000000000000",
+        explorer_url: "https://www.blockchain.com/explorer/addresses/btc/bc1qreplacewithyourbtcaddresshere00000000000000",
+    },
+    CryptoWallet {
+        symbol: "ETH",
+        network: "Ethereum",
+        address: "0xReplaceWithYourEthAddress000000000000000000",
+        explorer_url: "https://etherscan.io/address/0xReplaceWithYourEthAddress000000000000000000",
+    },
+    CryptoWallet {
+        symbol: "SOL",
+        network: "Solana",
+        address: "ReplaceWithYourSolAddress11111111111111111111111",
+        explorer_url: "https://solscan.io/account/ReplaceWithYourSolAddress11111111111111111111111",
     },
 ];
 
@@ -139,6 +168,34 @@ pub fn DonateSection() -> impl IntoView {
                             children=move |link| {
                                 view! {
                                     <a href=link.href target="_blank" rel="noopener noreferrer" class=link.class_name aria-label=link.aria_label>{link.text}</a>
+                                }
+                            }
+                        />
+                    </div>
+                    <div class="crypto-wallets" aria-label="Crypto donation wallets">
+                        <div class="crypto-title">"Crypto donations"</div>
+                        <p class="crypto-sub">"Prefer crypto? Use one of the wallets below."</p>
+                        <For
+                            each=move || CRYPTO_WALLETS.into_iter()
+                            key=|wallet| wallet.symbol
+                            children=move |wallet| {
+                                view! {
+                                    <div class="crypto-wallet-row">
+                                        <div class="crypto-wallet-meta">
+                                            <span class="crypto-wallet-symbol">{wallet.symbol}</span>
+                                            <span class="crypto-wallet-network">{wallet.network}</span>
+                                        </div>
+                                        <code class="crypto-wallet-address">{wallet.address}</code>
+                                        <a
+                                            href=wallet.explorer_url
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="crypto-wallet-link"
+                                            aria-label=format!("Open {} wallet address in explorer", wallet.symbol)
+                                        >
+                                            "View"
+                                        </a>
+                                    </div>
                                 }
                             }
                         />
