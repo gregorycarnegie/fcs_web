@@ -21,7 +21,7 @@ struct CryptoWallet {
     symbol: &'static str,
     network: &'static str,
     address: &'static str,
-    explorer_url: &'static str,
+    explorer_base_url: &'static str,
 }
 
 const FALLBACK_DONATE_TIERS: [DonateTier; 1] = [DonateTier {
@@ -90,20 +90,20 @@ const CRYPTO_WALLETS: [CryptoWallet; 3] = [
     CryptoWallet {
         symbol: "BTC",
         network: "Bitcoin",
-        address: "bc1qreplacewithyourbtcaddresshere00000000000000",
-        explorer_url: "https://www.blockchain.com/explorer/addresses/btc/bc1qreplacewithyourbtcaddresshere00000000000000",
+        address: "bc1qkuj79evqn87fagxygpfmgt4qmnqg4mm6qdejmg",
+        explorer_base_url: "https://www.blockchain.com/explorer/addresses/btc/",
     },
     CryptoWallet {
         symbol: "ETH",
         network: "Ethereum",
-        address: "0xReplaceWithYourEthAddress000000000000000000",
-        explorer_url: "https://etherscan.io/address/0xReplaceWithYourEthAddress000000000000000000",
+        address: "0x32Fa5C823D4fa3A4745AAc7C56325ED849340F28",
+        explorer_base_url: "https://etherscan.io/address/",
     },
     CryptoWallet {
         symbol: "SOL",
         network: "Solana",
-        address: "ReplaceWithYourSolAddress11111111111111111111111",
-        explorer_url: "https://solscan.io/account/ReplaceWithYourSolAddress11111111111111111111111",
+        address: "8z1BWsshYfkdgJm38RHRuhhVkYiPFSZLXbaSMTNch8e1",
+        explorer_base_url: "https://solscan.io/account/",
     },
 ];
 
@@ -180,6 +180,7 @@ pub fn DonateSection() -> impl IntoView {
                             key=|wallet| wallet.symbol
                             children=move |wallet| {
                                 let (show_qr, set_show_qr) = signal(false);
+                                let explorer_url = format!("{}{}", wallet.explorer_base_url, wallet.address);
                                 view! {
                                     <div class="crypto-wallet-item">
                                         <div class="crypto-wallet-row">
@@ -198,7 +199,7 @@ pub fn DonateSection() -> impl IntoView {
                                                     {move || if show_qr.get() { "Hide QR" } else { "Show QR" }}
                                                 </button>
                                                 <a
-                                                    href=wallet.explorer_url
+                                                    href=explorer_url
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                     class="crypto-wallet-link"
