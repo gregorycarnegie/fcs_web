@@ -40,5 +40,8 @@ jobs:
       - name: WASM bundle build
         run: trunk build app.html --release
 
+      - name: Performance budget checks
+        run: npm run perf:ci
+
       - name: Playwright E2E tests
         run: npm run e2e

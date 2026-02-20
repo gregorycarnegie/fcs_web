@@ -5,9 +5,15 @@
     "e2e": "playwright test",
     "e2e:headed": "playwright test --headed",
     "e2e:visual": "playwright test e2e/visual.spec.ts",
-    "e2e:visual:update": "playwright test e2e/visual.spec.ts --update-snapshots"
+    "e2e:visual:update": "playwright test e2e/visual.spec.ts --update-snapshots",
+    "e2e:responsive": "playwright test e2e/responsive.spec.ts",
+    "perf:build": "trunk build app.html --release",
+    "perf:bundle": "bash scripts/check_bundle_sizes.sh",
+    "perf:lighthouse": "lhci autorun --config=./lighthouserc.json",
+    "perf:ci": "npm run perf:build && npm run perf:bundle && npm run perf:lighthouse"
   },
   "devDependencies": {
+    "@lhci/cli": "^0.15.1",
     "@playwright/test": "^1.52.0"
   }
 }

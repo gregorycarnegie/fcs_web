@@ -15,13 +15,13 @@
 10. [x] Respect reduced-motion preferences
 11. [x] Disable/soften reveal and hero animations under `prefers-reduced-motion`.
 
-12. [ ] Improve performance budget
-13. [ ] Optimize font loading (`preload`, subset/self-host if needed).
-14. [ ] Audit bundle size and set Lighthouse/perf targets.
+12. [x] Improve performance budget
+13. [x] Optimize font loading (`preload`, subset/self-host if needed).
+14. [x] Audit bundle size and set Lighthouse/perf targets.
 
-15. [ ] Strengthen responsive QA
-16. [ ] Validate at common breakpoints (320, 375, 768, 1024, 1440).
-17. [ ] Ensure no overflow/clipping and stable spacing/typography scale.
+15. [x] Strengthen responsive QA
+16. [x] Validate at common breakpoints (320, 375, 768, 1024, 1440).
+17. [x] Ensure no overflow/clipping and stable spacing/typography scale.
 
 18. [ ] Harden content/config maintainability
 19. [ ] Move repeated card/tier/preset data into static arrays/structs and render with `For`.

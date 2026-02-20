@@ -68,6 +68,12 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
   npm run e2e
   ```
 
+- Responsive QA checks at `320`, `375`, `768`, `1024`, `1440`:
+
+  ```bash
+  npm run e2e:responsive
+  ```
+
 - Visual regression snapshots (desktop + mobile):
 
   ```bash
@@ -76,6 +82,14 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
   ```
 
   First command captures baseline PNGs in `e2e/visual.spec.ts-snapshots/`; second command fails on unexpected diffs.
+
+- Performance budget checks (bundle + Lighthouse thresholds):
+
+  ```bash
+  npm run perf:ci
+  ```
+
+  This runs a release build, enforces bundle budgets (`scripts/check_bundle_sizes.sh`), and applies Lighthouse assertions (`lighthouserc.json`).
 
 ## Notes
 

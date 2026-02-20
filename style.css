@@ -55,6 +55,8 @@
     font-weight: 800;
     font-size: 1.1rem;
     letter-spacing: -0.02em;
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 
   .nav-logo span { color: var(--accent); }
@@ -141,6 +143,8 @@
     letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-bottom: 1.5rem;
+    max-width: 100%;
+    overflow-wrap: anywhere;
     opacity: 0;
     animation: fadeUp 0.6s 0.1s forwards;
   }
@@ -152,6 +156,7 @@
     line-height: 0.95;
     letter-spacing: -0.03em;
     max-width: 14ch;
+    overflow-wrap: anywhere;
     opacity: 0;
     animation: fadeUp 0.7s 0.2s forwards;
   }
@@ -165,7 +170,7 @@
     margin-top: 2rem;
     max-width: 52ch;
     color: var(--muted);
-    font-size: 1.05rem;
+    font-size: clamp(0.95rem, 1.2vw, 1.05rem);
     line-height: 1.7;
     opacity: 0;
     animation: fadeUp 0.7s 0.35s forwards;
@@ -251,7 +256,7 @@
 
   .stat-val {
     font-family: 'Syne', sans-serif;
-    font-size: 1.8rem;
+    font-size: clamp(1.4rem, 2.2vw, 1.8rem);
     font-weight: 800;
     color: var(--accent);
   }
@@ -344,6 +349,11 @@
     align-items: center;
   }
 
+  .tech-inner > div,
+  .donate-inner > div {
+    min-width: 0;
+  }
+
   .code-block {
     background: var(--code-bg);
     border: 1px solid var(--border);
@@ -353,6 +363,11 @@
     font-size: 0.78rem;
     line-height: 1.8;
     overflow-x: auto;
+  }
+
+  .code-block pre {
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   .code-block .comment { color: #4a4a6a; }
@@ -447,7 +462,7 @@
   .download-card p { font-size: 0.8rem; color: var(--muted); }
 
   .dl-tag {
-    display: inline-block;
+    display: block;
     font-family: 'DM Mono', monospace;
     font-size: 0.65rem;
     padding: 0.2rem 0.6rem;
@@ -455,6 +470,11 @@
     background: rgba(232,93,38,0.15);
     color: var(--accent);
     margin-top: auto;
+    width: 100%;
+    white-space: normal;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   /* ─── DONATE ─── */
@@ -592,6 +612,8 @@
     display: flex;
     gap: 1.5rem;
     list-style: none;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .footer-links a {
@@ -647,6 +669,15 @@
   }
 
   /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    nav { padding: 1rem 2rem; }
+    nav ul { gap: 1.2rem; }
+    .hero { padding: 7.5rem 2rem 4.5rem; }
+    section { padding: 5rem 2rem; }
+    .stats-bar { padding: 1.25rem 2rem; gap: 2rem; }
+    .tech-inner, .donate-inner { gap: 3rem; }
+  }
+
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
     nav ul { display: none; }
@@ -655,4 +686,16 @@
     .tech-inner, .donate-inner { grid-template-columns: 1fr; gap: 2.5rem; }
     .stats-bar { padding: 1.5rem; gap: 2rem; }
     footer { flex-direction: column; text-align: center; }
+  }
+
+  @media (max-width: 375px) {
+    nav { padding: 0.9rem 1rem; }
+    .nav-logo { font-size: 1rem; }
+    .hero { padding: 6.5rem 1rem 3rem; }
+    section { padding: 3.25rem 1rem; }
+    .stats-bar { padding: 1rem; gap: 1rem; }
+    .features-grid, .download-grid { grid-template-columns: 1fr; }
+    .feature-card, .download-card, .tier { padding: 1.25rem; }
+    .btn, .btn-donate, .btn-donate-outline { width: 100%; justify-content: center; }
+    .code-block { font-size: 0.72rem; }
   }
