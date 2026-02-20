@@ -12,6 +12,7 @@ const PRESETS: [&str; 7] = [
 
 const FALLBACK_PRESET: &str = "default-preset";
 
+#[allow(clippy::const_is_empty)]
 fn resolved_presets() -> Vec<&'static str> {
     if PRESETS.is_empty() {
         vec![FALLBACK_PRESET]
@@ -59,20 +60,20 @@ pub fn TechSection() -> impl IntoView {
                         <pre style="white-space: pre-wrap; margin: 0;">
 "# Batch crop to LinkedIn preset with GPU
 yunet-cli \
-  --input ./photos/ \
-  --preset LinkedIn \
-  --face-height 60 \
-  --gpu \
-  --enhance \
-  --quality-threshold Medium \
+    --input ./photos/ \
+    --preset LinkedIn \
+    --face-height 60 \
+    --gpu \
+    --enhance \
+    --quality-threshold Medium \
   --output ./crops/
 
 # Mapping-driven batch from Excel
 yunet-cli \
-  --mapping-file roster.xlsx \
-  --mapping-source photo_path \
-  --mapping-output employee_id \
-  --preset IDCard \
+    --mapping-file roster.xlsx \
+    --mapping-source photo_path \
+    --mapping-output employee_id \
+    --preset IDCard \
   --output ./id_crops/
 
 # Benchmark GPU vs CPU preprocessing

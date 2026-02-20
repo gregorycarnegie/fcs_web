@@ -78,6 +78,7 @@ const DONATE_LINKS: [DonateLink; 3] = [
     },
 ];
 
+#[allow(clippy::const_is_empty)]
 fn resolved_donate_tiers() -> Vec<DonateTier> {
     if DONATE_TIERS.is_empty() {
         FALLBACK_DONATE_TIERS.to_vec()
@@ -86,6 +87,7 @@ fn resolved_donate_tiers() -> Vec<DonateTier> {
     }
 }
 
+#[allow(clippy::const_is_empty)]
 fn resolved_donate_links() -> Vec<DonateLink> {
     if DONATE_LINKS.is_empty() {
         FALLBACK_DONATE_LINKS.to_vec()

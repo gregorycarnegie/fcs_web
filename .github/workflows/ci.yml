@@ -31,6 +31,12 @@ jobs:
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
 
+      - name: Rust format check
+        run: cargo fmt --check
+
+      - name: Rust clippy (deny warnings)
+        run: cargo clippy --locked -- -D warnings
+
       - name: Native build
         run: cargo build --locked
 

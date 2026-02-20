@@ -29,8 +29,8 @@
 20. [x] Add error/empty resilience checks
 21. [x] Ensure app still renders cleanly if dynamic pieces (future data/config) are missing.
 
-22. [ ] Add code quality gates
-23. [ ] CI: `cargo fmt --check`, `cargo clippy -D warnings`, plus existing build/tests.
+22. [x] Add code quality gates
+23. [x] CI: `cargo fmt --check`, `cargo clippy -D warnings`, plus existing build/tests.
 
 24. [ ] Improve docs for contributors
 25. [ ] Add a “Contributing” section: architecture map, component conventions, test commands, release checklist.

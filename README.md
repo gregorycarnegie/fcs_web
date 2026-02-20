@@ -48,6 +48,19 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
   cargo build
   ```
 
+- Rust code quality gates:
+
+  ```bash
+  npm run lint:fmt
+  npm run lint:clippy
+  ```
+
+  Or run all Rust checks in one command:
+
+  ```bash
+  npm run check:rust
+  ```
+
 - Smoke tests for key section IDs/content:
 
   ```bash
@@ -94,4 +107,4 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
 ## Notes
 
 - `app.html` is the Trunk entry file for the Leptos version.
-- CI runs `cargo build`, `cargo test`, and `trunk build app.html --release` on push/PR.
+- CI runs `cargo fmt --check`, `cargo clippy -- -D warnings`, Rust build/tests, Trunk release build, performance checks, and Playwright tests on push/PR.

@@ -61,6 +61,7 @@ const FEATURE_ITEMS: [FeatureItem; 9] = [
     },
 ];
 
+#[allow(clippy::const_is_empty)]
 fn resolved_feature_items() -> Vec<FeatureItem> {
     if FEATURE_ITEMS.is_empty() {
         FALLBACK_FEATURE_ITEMS.to_vec()

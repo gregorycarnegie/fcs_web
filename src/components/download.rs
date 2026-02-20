@@ -54,6 +54,7 @@ const DOWNLOAD_CARDS: [DownloadCard; 4] = [
     },
 ];
 
+#[allow(clippy::const_is_empty)]
 fn resolved_download_cards() -> Vec<DownloadCard> {
     if DOWNLOAD_CARDS.is_empty() {
         FALLBACK_DOWNLOAD_CARDS.to_vec()
