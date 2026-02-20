@@ -619,7 +619,7 @@
     border-top: 1px solid var(--border);
   }
 
-  .crypto-wallet-row:first-of-type {
+  .crypto-wallet-item:first-of-type .crypto-wallet-row {
     border-top: 0;
   }
 
@@ -658,6 +658,37 @@
     border: 1px solid var(--border);
     border-radius: 4px;
     padding: 0.25rem 0.5rem;
+  }
+
+  .crypto-wallet-actions {
+    display: flex;
+    gap: 0.45rem;
+    align-items: center;
+  }
+
+  .crypto-wallet-qr-btn {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    cursor: pointer;
+  }
+
+  .crypto-wallet-qr-btn:hover {
+    border-color: var(--accent);
+    background: rgba(232,93,38,0.08);
+  }
+
+  .crypto-wallet-qr {
+    margin-top: 0.6rem;
+    width: 180px;
+    height: 180px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: white;
+    display: block;
   }
 
   .crypto-wallet-link:hover {
@@ -774,6 +805,8 @@
     .feature-card, .download-card, .tier { padding: 1.25rem; }
     .btn, .btn-donate, .btn-donate-outline { width: 100%; justify-content: center; }
     .crypto-wallet-row { grid-template-columns: 1fr; gap: 0.35rem; }
+    .crypto-wallet-actions { justify-content: flex-start; }
     .crypto-wallet-link { justify-self: start; }
+    .crypto-wallet-qr { width: 156px; height: 156px; }
     .code-block { font-size: 0.72rem; }
   }

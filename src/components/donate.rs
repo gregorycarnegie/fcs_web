@@ -67,7 +67,7 @@ const DONATE_TIERS: [DonateTier; 4] = [
 
 const DONATE_LINKS: [DonateLink; 3] = [
     DonateLink {
-        href: "https://ko-fi.com",
+        href: "https://ko-fi.com/gregory_carnegie",
         aria_label: "Donate via Ko-fi",
         class_name: "btn-donate",
         text: "☕ Ko-fi",
@@ -79,7 +79,7 @@ const DONATE_LINKS: [DonateLink; 3] = [
         text: "♥ GitHub Sponsors",
     },
     DonateLink {
-        href: "https://buymeacoffee.com",
+        href: "https://buymeacoffee.com/gregory_carnegie",
         aria_label: "Donate via Buy Me a Coffee",
         class_name: "btn-donate-outline",
         text: "🍵 Buy Me a Coffee",
@@ -179,22 +179,43 @@ pub fn DonateSection() -> impl IntoView {
                             each=move || CRYPTO_WALLETS.into_iter()
                             key=|wallet| wallet.symbol
                             children=move |wallet| {
+                                let (show_qr, set_show_qr) = signal(false);
                                 view! {
-                                    <div class="crypto-wallet-row">
-                                        <div class="crypto-wallet-meta">
-                                            <span class="crypto-wallet-symbol">{wallet.symbol}</span>
-                                            <span class="crypto-wallet-network">{wallet.network}</span>
+                                    <div class="crypto-wallet-item">
+                                        <div class="crypto-wallet-row">
+                                            <div class="crypto-wallet-meta">
+                                                <span class="crypto-wallet-symbol">{wallet.symbol}</span>
+                                                <span class="crypto-wallet-network">{wallet.network}</span>
+                                            </div>
+                                            <code class="crypto-wallet-address">{wallet.address}</code>
+                                            <div class="crypto-wallet-actions">
+                                                <button
+                                                    type="button"
+                                                    class="crypto-wallet-qr-btn"
+                                                    aria-expanded=move || if show_qr.get() { "true" } else { "false" }
+                                                    on:click=move |_| set_show_qr.update(|v| *v = !*v)
+                                                >
+                                                    {move || if show_qr.get() { "Hide QR" } else { "Show QR" }}
+                                                </button>
+                                                <a
+                                                    href=wallet.explorer_url
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="crypto-wallet-link"
+                                                    aria-label=format!("Open {} wallet address in explorer", wallet.symbol)
+                                                >
+                                                    "View"
+                                                </a>
+                                            </div>
                                         </div>
-                                        <code class="crypto-wallet-address">{wallet.address}</code>
-                                        <a
-                                            href=wallet.explorer_url
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            class="crypto-wallet-link"
-                                            aria-label=format!("Open {} wallet address in explorer", wallet.symbol)
-                                        >
-                                            "View"
-                                        </a>
+                                        <Show when=move || show_qr.get()>
+                                            <img
+                                                class="crypto-wallet-qr"
+                                                src=format!("https://api.qrserver.com/v1/create-qr-code/?size=180x180&data={}", wallet.address)
+                                                alt=format!("QR code for {} wallet address", wallet.symbol)
+                                                loading="lazy"
+                                            />
+                                        </Show>
                                     </div>
                                 }
                             }
