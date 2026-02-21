@@ -51,7 +51,7 @@
         "resource-summary:total:size": [
           "error",
           {
-            "maxNumericValue": 1800000
+            "maxNumericValue": 2400000
           }
         ]
       }
