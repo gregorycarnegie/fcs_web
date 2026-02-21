@@ -32,20 +32,8 @@ jobs:
       - name: Install Trunk
         run: cargo install trunk --locked
 
-      - name: Resolve public URL
-        shell: bash
-        run: |
-          repo_name="${GITHUB_REPOSITORY#*/}"
-          if [[ "$repo_name" == *.github.io ]]; then
-            public_url="/"
-          else
-            public_url="/${repo_name}/"
-          fi
-          echo "PUBLIC_URL=${public_url}" >> "$GITHUB_ENV"
-          echo "Using PUBLIC_URL=${public_url}"
-
       - name: Build site
-        run: trunk build app.html --release --public-url "${{ env.PUBLIC_URL }}"
+        run: trunk build app.html --release --public-url "/"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
