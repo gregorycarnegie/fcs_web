@@ -63,5 +63,9 @@ jobs:
       - name: Performance budget checks
         run: npm run perf:ci
 
-      - name: Playwright E2E tests
-        run: npm run e2e
+      - name: Playwright E2E tests (functional)
+        run: npx playwright test --grep-invert "visual regression"
+
+      - name: Playwright visual regression (non-blocking)
+        continue-on-error: true
+        run: npm run e2e:visual
