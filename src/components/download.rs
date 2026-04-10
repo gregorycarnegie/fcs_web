@@ -11,7 +11,7 @@ struct DownloadCard {
 }
 
 const FALLBACK_DOWNLOAD_CARDS: [DownloadCard; 1] = [DownloadCard {
-    href: "https://github.com/gregorycarnegie/iron_cropper/releases/latest",
+    href: "https://github.com/gregorycarnegie/face-crop-studio/releases/latest",
     aria_label: "Open latest Face Crop Studio releases",
     icon: "ℹ️",
     title: "Releases Unavailable",
@@ -21,7 +21,7 @@ const FALLBACK_DOWNLOAD_CARDS: [DownloadCard; 1] = [DownloadCard {
 
 const DOWNLOAD_CARDS: [DownloadCard; 4] = [
     DownloadCard {
-        href: "https://github.com/gregorycarnegie/iron_cropper/releases/latest",
+        href: "https://github.com/gregorycarnegie/face-crop-studio/releases/latest",
         aria_label: "Open latest GitHub release for MSI installer",
         icon: "📦",
         title: "MSI Installer",
@@ -29,7 +29,7 @@ const DOWNLOAD_CARDS: [DownloadCard; 4] = [
         tag: "face-crop-studio-windows-x86_64.msi",
     },
     DownloadCard {
-        href: "https://github.com/gregorycarnegie/iron_cropper/releases/latest",
+        href: "https://github.com/gregorycarnegie/face-crop-studio/releases/latest",
         aria_label: "Open latest GitHub release for setup executable",
         icon: "🔧",
         title: "Setup Executable",
@@ -37,7 +37,7 @@ const DOWNLOAD_CARDS: [DownloadCard; 4] = [
         tag: "face-crop-studio-windows-x86_64-setup.exe",
     },
     DownloadCard {
-        href: "https://github.com/gregorycarnegie/iron_cropper/releases/latest",
+        href: "https://github.com/gregorycarnegie/face-crop-studio/releases/latest",
         aria_label: "Open latest GitHub release for portable zip",
         icon: "🗜️",
         title: "Portable ZIP",
@@ -45,7 +45,7 @@ const DOWNLOAD_CARDS: [DownloadCard; 4] = [
         tag: "face-crop-studio-windows-x86_64.zip",
     },
     DownloadCard {
-        href: "https://github.com/gregorycarnegie/iron_cropper",
+        href: "https://github.com/gregorycarnegie/face-crop-studio",
         aria_label: "Open Face Crop Studio source repository on GitHub",
         icon: "🦀",
         title: "Build from Source",

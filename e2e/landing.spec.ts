@@ -58,7 +58,7 @@ test.describe("landing page e2e", () => {
 
     await expect(page.getByRole("link", { name: "GitHub", exact: true }).first()).toHaveAttribute(
       "href",
-      /github\.com\/gregorycarnegie\/iron_cropper/
+      /github\.com\/gregorycarnegie\/face-crop-studio/
     );
   });
 });
