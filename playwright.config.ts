@@ -12,7 +12,7 @@ export default defineConfig({
   },
   webServer: {
     command:
-      "trunk serve app.html --address 127.0.0.1 --port 4173 --watch app.html --watch style.css --watch src",
+      "trunk serve --address 127.0.0.1 --port 4173 --watch index.html --watch style.css --watch src",
     port: 4173,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000

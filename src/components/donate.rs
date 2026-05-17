@@ -123,7 +123,7 @@ pub fn DonateSection() -> impl IntoView {
                 <div class="donate-copy">
                     <div class="section-label">"// support development"</div>
                     <h2>"Help make it "<span>"better"</span></h2>
-                    <p>"Face Crop Studio is free and open-source. Every donation goes directly into development time — better GPU pipelines, new preset types, Linux and macOS builds, and UI improvements."</p>
+                    <p>"Face Crop Studio is free and open-source. Every donation goes directly into development time — better GPU pipelines, new preset types, broader platform coverage, and UI improvements."</p>
                     <p>"Even a small contribution keeps the project moving forward. No subscription, no paywalls, no strings attached."</p>
                     <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent);">"\"Good tools should be accessible to everyone.\""</p>
                 </div>

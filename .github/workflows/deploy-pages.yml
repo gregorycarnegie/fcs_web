@@ -33,7 +33,7 @@ jobs:
         run: cargo install trunk --locked
 
       - name: Build site
-        run: trunk build app.html --release --public-url "/"
+        run: trunk build index.html --release --public-url "/"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

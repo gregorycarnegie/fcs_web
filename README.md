@@ -8,7 +8,7 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
 - `src/components/` section-level Leptos components (`NavBar`, `HeroSection`, etc.)
 - `src/hooks/mod.rs` browser behavior hooks (scroll reveal observer)
 - `style.css` external stylesheet loaded by Trunk
-- `app.html` Trunk entrypoint
+- `index.html` Trunk entrypoint
 - `.github/workflows/ci.yml` build + smoke checks
 
 ## Prerequisites
@@ -31,7 +31,7 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
 1. Start the dev server:
 
    ```bash
-   trunk serve app.html --open
+   trunk serve --open
    ```
 
 2. Trunk will print a local URL (usually `http://127.0.0.1:8080`).
@@ -70,7 +70,7 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
 - WASM compile via Trunk:
 
   ```bash
-  trunk build app.html
+  trunk build
   ```
 
 - Browser E2E checks (Playwright):
@@ -106,12 +106,12 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
 
 ## Notes
 
-- `app.html` is the Trunk entry file for the Leptos version.
+- `index.html` is the Trunk entry file for the Leptos version.
 - CI runs `cargo fmt --check`, `cargo clippy -- -D warnings`, dependency audits (`npm audit`, `cargo audit`), Rust build/tests, Trunk release build, performance checks, and Playwright tests on push/PR.
 
 ## Security Headers
 
-- `app.html` includes meta-based security controls to keep local/dev behavior safe by default.
+- `index.html` includes meta-based security controls to keep local/dev behavior safe by default.
 - Production deployments should enforce headers at the web server/CDN layer.
 - A deploy header template is provided in `_headers` (copied into `dist/` by Trunk).
 
@@ -160,5 +160,5 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
 2. Run `npm run e2e` and confirm no unexpected failures.
 3. If UI changed, run `npm run e2e:visual:update`, review snapshot diffs, then run `npm run e2e:visual`.
 4. Run `npm run perf:ci` and confirm Lighthouse/bundle gates pass.
-5. Run `trunk build app.html --release` and verify `dist/` output is updated as expected.
+5. Run `trunk build --release` and verify `dist/` output is updated as expected.
 6. Update docs/TODO if scope changed and prepare PR with a concise change summary.

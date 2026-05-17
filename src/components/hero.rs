@@ -35,7 +35,7 @@ pub fn HeroSection() -> impl IntoView {
                     <span class="badge">"MIT License"</span>
                 </div>
                 <div class="hero-actions">
-                    <a href="#download" class="btn btn-primary">"⬇ Download for Windows"</a>
+                    <a href="#download" class="btn btn-primary">"⬇ Download Free"</a>
                     <a href="https://github.com/gregorycarnegie/face-crop-studio" target="_blank" rel="noopener noreferrer" class="btn btn-outline">"View on GitHub →"</a>
                 </div>
             </div>

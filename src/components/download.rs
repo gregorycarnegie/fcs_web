@@ -19,37 +19,61 @@ const FALLBACK_DOWNLOAD_CARDS: [DownloadCard; 1] = [DownloadCard {
     tag: "Check latest release artifacts",
 }];
 
-const DOWNLOAD_CARDS: [DownloadCard; 4] = [
+const DOWNLOAD_CARDS: [DownloadCard; 7] = [
     DownloadCard {
         href: "https://github.com/gregorycarnegie/face-crop-studio/releases/latest",
-        aria_label: "Open latest GitHub release for MSI installer",
+        aria_label: "Open latest GitHub release for Windows MSI installer",
         icon: "📦",
-        title: "MSI Installer",
+        title: "Windows MSI",
         description: "Enterprise-style installer for Windows x86-64. Clean install and uninstall support.",
         tag: "face-crop-studio-windows-x86_64.msi",
     },
     DownloadCard {
         href: "https://github.com/gregorycarnegie/face-crop-studio/releases/latest",
-        aria_label: "Open latest GitHub release for setup executable",
+        aria_label: "Open latest GitHub release for Windows setup executable",
         icon: "🔧",
-        title: "Setup Executable",
+        title: "Windows Setup",
         description: "Traditional Windows installer with guided setup wizard.",
         tag: "face-crop-studio-windows-x86_64-setup.exe",
     },
     DownloadCard {
         href: "https://github.com/gregorycarnegie/face-crop-studio/releases/latest",
-        aria_label: "Open latest GitHub release for portable zip",
+        aria_label: "Open latest GitHub release for Windows portable zip",
         icon: "🗜️",
-        title: "Portable ZIP",
+        title: "Windows Portable",
         description: "No install needed. Extract anywhere and run. Ideal for servers and restricted environments.",
         tag: "face-crop-studio-windows-x86_64.zip",
+    },
+    DownloadCard {
+        href: "https://github.com/gregorycarnegie/face-crop-studio/releases/latest",
+        aria_label: "Open latest GitHub release for macOS Apple Silicon disk image",
+        icon: "🍎",
+        title: "macOS (Apple Silicon)",
+        description: "Signed disk image for Apple Silicon Macs. Drag to Applications and launch.",
+        tag: "face-crop-studio-aarch64-apple-darwin.dmg",
+    },
+    DownloadCard {
+        href: "https://github.com/gregorycarnegie/face-crop-studio/releases/latest",
+        aria_label: "Open latest GitHub release for Linux AppImage",
+        icon: "🐧",
+        title: "Linux AppImage",
+        description: "Portable Linux binary for x86-64. Make it executable and run — no install required.",
+        tag: "face-crop-studio-x86_64.AppImage",
+    },
+    DownloadCard {
+        href: "https://github.com/gregorycarnegie/face-crop-studio/releases/latest",
+        aria_label: "Open latest GitHub release for Debian package",
+        icon: "📥",
+        title: "Linux .deb",
+        description: "Debian/Ubuntu package for x86-64. Install with apt or dpkg for system integration.",
+        tag: "face-crop-studio-x86_64.deb",
     },
     DownloadCard {
         href: "https://github.com/gregorycarnegie/face-crop-studio",
         aria_label: "Open Face Crop Studio source repository on GitHub",
         icon: "🦀",
         title: "Build from Source",
-        description: "Full Rust workspace. Requires NASM on PATH. Linux and macOS supported via source build.",
+        description: "Full Rust workspace. Requires NASM on PATH. Build for any platform Rust supports.",
         tag: "cargo build --release --workspace",
     },
 ];
@@ -71,7 +95,7 @@ pub fn DownloadSection() -> impl IntoView {
         <section class="download-section" id="download">
             <div class="section-label">"// get started"</div>
             <h2>"Download "<span>"for free"</span></h2>
-            <p style="color: var(--muted); margin-top: 1rem; max-width: 55ch; font-size: 0.95rem; line-height: 1.7;">"Windows binaries are ready to go. The release package includes the YuNet ONNX model — no manual setup needed."</p>
+            <p style="color: var(--muted); margin-top: 1rem; max-width: 55ch; font-size: 0.95rem; line-height: 1.7;">"Native binaries for Windows, macOS, and Linux. The release package includes the YuNet ONNX model — no manual setup needed."</p>
 
             <div class="download-grid">
                 <For

@@ -58,7 +58,7 @@ jobs:
         run: cargo test --locked
 
       - name: WASM bundle build
-        run: trunk build app.html --release
+        run: trunk build index.html --release
 
       - name: Performance budget checks
         run: npm run perf:ci
