@@ -17,6 +17,6 @@
   },
   "devDependencies": {
     "@lhci/cli": "^0.15.1",
-    "@playwright/test": "^1.52.0"
+    "@playwright/test": "^1.60.0"
   }
 }
