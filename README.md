@@ -13,6 +13,9 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
 
 ## Prerequisites
 
+- [Bun](https://bun.com/docs/installation) 1.4.5 (pinned in `package.json`) for dependency installation and scripts.
+- Node.js 22.19 or newer for the Playwright and Lighthouse CLIs launched by Bun.
+- Bash for the bundle-size check (`Git Bash` works on Windows).
 - Rust toolchain installed
 - `wasm32-unknown-unknown` target:
 
@@ -25,6 +28,8 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
   ```bash
   cargo install trunk
   ```
+
+Install the locked tooling dependencies with `bun install --frozen-lockfile`. After changing dependencies, run `bun install` and commit the updated `bun.lock`.
 
 ## Run Locally (Browser)
 
@@ -51,14 +56,14 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
 - Rust code quality gates:
 
   ```bash
-  npm run lint:fmt
-  npm run lint:clippy
+  bun run lint:fmt
+  bun run lint:clippy
   ```
 
   Or run all Rust checks in one command:
 
   ```bash
-  npm run check:rust
+  bun run check:rust
   ```
 
 - Smoke tests for key section IDs/content:
@@ -76,22 +81,22 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
 - Browser E2E checks (Playwright):
 
   ```bash
-  npm install
-  npx playwright install --with-deps chromium
-  npm run e2e
+  bun install --frozen-lockfile
+  bunx --no-install playwright install --with-deps chromium
+  bun run e2e
   ```
 
 - Responsive QA checks at `320`, `375`, `768`, `1024`, `1440`:
 
   ```bash
-  npm run e2e:responsive
+  bun run e2e:responsive
   ```
 
 - Visual regression snapshots (desktop + mobile):
 
   ```bash
-  npm run e2e:visual:update
-  npm run e2e:visual
+  bun run e2e:visual:update
+  bun run e2e:visual
   ```
 
   First command captures baseline PNGs in `e2e/visual.spec.ts-snapshots/`; second command fails on unexpected diffs.
@@ -99,7 +104,7 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
 - Performance budget checks (bundle + Lighthouse thresholds):
 
   ```bash
-  npm run perf:ci
+  bun run perf:ci
   ```
 
   This runs a release build, enforces bundle budgets (`scripts/check_bundle_sizes.sh`), and applies Lighthouse assertions (`lighthouserc.json`).
@@ -107,7 +112,7 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
 ## Notes
 
 - `index.html` is the Trunk entry file for the Leptos version.
-- CI runs `cargo fmt --check`, `cargo clippy -- -D warnings`, dependency audits (`npm audit`, `cargo audit`), Rust build/tests, Trunk release build, performance checks, and Playwright tests on push/PR.
+- CI runs `cargo fmt --check`, `cargo clippy -- -D warnings`, dependency audits (`bun audit --prod`, `cargo audit`), Rust build/tests, Trunk release build, performance checks, and Playwright tests on push/PR.
 
 ## Security Headers
 
@@ -117,8 +122,8 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
 
 ### Dependency Remediation Policy
 
-1. CI fails on `npm audit` high/critical findings and any `cargo audit` advisory.
-2. Patch direct dependencies first (`npm update`, `cargo update -p <crate>`), then rerun full checks.
+1. CI fails on `bun audit --prod` high/critical findings and any `cargo audit` advisory.
+2. Patch direct dependencies first (`bun update`, `cargo update -p <crate>`), then rerun full checks.
 3. If a fix is unavailable, document the risk and mitigation in PR notes before merging.
 4. Remove temporary exceptions once upstream patches are released.
 
@@ -144,21 +149,21 @@ This project recreates the `index.html` landing page using the `leptos` Rust cra
 ### Test and check commands
 
 - Rust checks:
-  - `npm run check:rust`
+  - `bun run check:rust`
 - E2E + visual + responsive:
-  - `npm run e2e`
-  - `npm run e2e:responsive`
-  - `npm run e2e:visual`
+  - `bun run e2e`
+  - `bun run e2e:responsive`
+  - `bun run e2e:visual`
 - Refresh visual baselines when intentional UI changes occur:
-  - `npm run e2e:visual:update`
+  - `bun run e2e:visual:update`
 - Performance budgets:
-  - `npm run perf:ci`
+  - `bun run perf:ci`
 
 ### Release checklist
 
-1. Run `npm run check:rust`.
-2. Run `npm run e2e` and confirm no unexpected failures.
-3. If UI changed, run `npm run e2e:visual:update`, review snapshot diffs, then run `npm run e2e:visual`.
-4. Run `npm run perf:ci` and confirm Lighthouse/bundle gates pass.
+1. Run `bun run check:rust`.
+2. Run `bun run e2e` and confirm no unexpected failures.
+3. If UI changed, run `bun run e2e:visual:update`, review snapshot diffs, then run `bun run e2e:visual`.
+4. Run `bun run perf:ci` and confirm Lighthouse/bundle gates pass.
 5. Run `trunk build --release` and verify `dist/` output is updated as expected.
 6. Update docs/TODO if scope changed and prepare PR with a concise change summary.
